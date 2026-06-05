@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dani ❤️ Vanesa</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ffd6e8,#fff4f8);
+    font-family:Arial,sans-serif;
+    text-align:center;
+}
+
+.caja{
+    background:white;
+    padding:35px;
+    border-radius:25px;
+    box-shadow:0 0 25px rgba(0,0,0,0.15);
+    max-width:350px;
+    z-index:2;
+}
+
+.corazon{
+    font-size:100px;
+    animation:latido 1s infinite;
+}
+
+@keyframes latido{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.25) rotate(5deg);}
+    100%{transform:scale(1);}
+}
+
+h1{
+    color:#d6336c;
+}
+
+#dias{
+    font-size:42px;
+    font-weight:bold;
+    color:#e63946;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 22px;
+    border:none;
+    border-radius:20px;
+    background:#ff4d6d;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+}
+
+#sorpresa{
+    margin-top:20px;
+    display:none;
+    font-size:22px;
+    color:#c9184a;
+    font-weight:bold;
+}
+
+.flor,
+.carta{
+    position:absolute;
+    top:-50px;
+    font-size:30px;
+    animation:caer linear forwards;
+}
+
+.flor{
+    z-index:1;
+}
+
+.carta{
+    z-index:3;
+    cursor:pointer;
+}
+
+@keyframes caer{
+    0%{
+        transform:translateY(-50px) rotate(0deg);
+        opacity:1;
+    }
+    100%{
+        transform:translateY(110vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.5);
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+}
+
+.contenidoCarta{
+    background:white;
+    width:85%;
+    max-width:520px;
+    max-height:75vh;
+    overflow-y:auto;
+    padding:25px;
+    border-radius:20px;
+    text-align:left;
+    position:relative;
+    box-shadow:0 0 30px rgba(0,0,0,0.25);
+}
+
+.contenidoCarta h2{
+    text-align:center;
+    color:#d6336c;
+    margin-top:10px;
+}
+
+.cerrar{
+    position:absolute;
+    top:10px;
+    right:15px;
+    font-size:30px;
+    cursor:pointer;
+    color:#d6336c;
+}
+
+.textoCarta p{
+    line-height:1.6;
+    margin-bottom:14px;
+    color:#444;
+}
+
+.firma{
+    text-align:right;
+    font-weight:bold;
+    color:#c9184a;
+}
+.botonCerrarCarta{
+    display:block;
+    margin:25px auto 5px auto;
+    padding:10px 22px;
+    border:none;
+    border-radius:20px;
+    background:#ff4d6d;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+.sello{
+    background:#ffe0ea;
+    color:#c9184a;
+    padding:8px 14px;
+    border-radius:20px;
+    display:inline-block;
+    margin-bottom:20px;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.subtituloCarta{
+    text-align:center;
+    color:#888;
+    margin-bottom:20px;
+    font-size:13px;
+}
+.sobre{
+    position:relative;
+    display:inline-block;
+    font-size:34px;
+}
+
+.numeroCarta{
+    position:absolute;
+    top:-6px;
+    right:-10px;
+
+    width:18px;
+    height:18px;
+
+    border-radius:50%;
+
+    background:#ffd700;
+    color:#333;
+
+    font-size:11px;
+    font-weight:bold;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border:1px solid rgba(0,0,0,0.15);
+
+    box-shadow:0 0 5px rgba(255,215,0,0.6);
+}
+.textoCarta{
+    text-align:left;
+}
+</style>
+</head>
+
+<body>
+
+<div class="caja">
+    <div class="corazon">❤️</div>
+
+    <h1>Desde aquel 1 de mayo de 2026</h1>
+
+    <p>Llevamos juntos:</p>
+
+    <div id="dias">0 días</div>
+
+    <button onclick="mostrarSorpresa()">Pulsa aquí</button>
+
+    <div id="sorpresa">
+        Te amo muchoo, mi vida ❤️
+    </div>
+</div>
+
+<div id="cartaModal" class="modal" onclick="cerrarSiClicaFuera(event)">
+
+    <div class="contenidoCarta">
+
+        <span class="cerrar" onclick="cerrarCarta()">×</span>
+
+        <h2>Para ti ❤️</h2>
+
+        <div class="sello">
+            💌 Carta #1 · 06/06/2026
+        </div>
+
+        <div class="subtituloCarta">
+            La primera carta de nuestra historia ❤️
+        </div>
+
+        <div class="textoCarta">
+
+            <p>Vanesa, mi amor,</p>
+
+            <p>Si me hubieran dicho hace unos meses que ibas a acabar siendo una de las personas más importantes de mis días, seguramente me habría costado creerlo.</p>
+
+            <p>Al principio simplemente me parecías una chica muy interesante y tenía ganas de conocerte. Pero poco a poco empecé a darme cuenta de que cada día tenía ganas de hablar contigo, de saber cómo te había ido el día y de escuchar todas esas cosas que te pasaban y que me contabas con tanta ilusión.</p>
+
+            <p>Nunca olvidaré cuando me dijiste que ibas a empezar a contarme tu día a día. Quizá para ti fue una frase más, pero para mí fue una de esas cosas pequeñas que significan mucho.</p>
+
+            <p>Y digo todas esas cosas porque contigo hasta las conversaciones más simples terminan teniendo algo especial. Hemos pasado de hablar de estudios o trabajo a hablar de emojis, de ideas locas, de libros que ni existen todavía, de la vida, de nuestros planes y de mil tonterías que al final hacen que siempre tenga ganas de seguir hablando contigo.</p>
+
+            <p>Sin darme cuenta, pasaste a formar parte de mis días de una forma que nunca había vivido con nadie.</p>
+
+            <p>Y quizás por eso hay tantas cosas que contigo están siendo nuevas para mí. No porque sean cosas extraordinarias, sino porque las estoy viviendo contigo. Muchas de ellas son primeras veces para mí, y me hace feliz que seas tú la persona con la que las estoy compartiendo.</p>
+
+            <p>También me gusta pensar en todas las cosas que hemos vivido en tan poco tiempo. Las quedadas, los paseos, las conversaciones que parecían durar cinco minutos aunque hubieran pasado horas, los buenos momentos, los momentos tranquilos y todos esos pequeños detalles que se han ido quedando conmigo sin que me diera cuenta.</p>
+
+            <p>Todavía me hace gracia pensar que una chica que decía que no era de quedar con gente acabó convirtiéndose en la persona con la que más me gusta pasar el tiempo.</p>
+
+            <p>Y aunque este peluche sea solo un detalle, también quería aprovechar para darte las gracias. Gracias por haber tenido paciencia con mis tonterías, por entenderme cuando ni yo mismo me entendía, por aceptar mis horarios imposibles y por hacer que una historia que empezó viéndonos solo los fines de semana por la distancia acabara convirtiéndose en algo tan bonito.</p>
+
+            <p>Y hay otra cosa que quiero que sepas. Muchas veces me has dicho que eres intensa, pero a mí me gusta que seas así. Me gusta que me cuentes tu día, que me mandes mensajes cuando te acuerdas de mí, que me envíes reels de Instagram, que compartas conmigo las cosas que te hacen gracia o que te llaman la atención. Me gusta porque siento que sale de ti, que lo haces de corazón y porque me haces sentir parte de tu vida, incluso en los detalles más pequeños.</p>
+
+            <p>No cambies esa intensidad. Es una de las cosas que más me gustan de ti.</p>
+
+            <p>Y también hay algo más que quiero decirte. Hace poco tuvimos nuestro primer malentendido. No quiero volver a darle vueltas porque sé que ya lo solucionamos, pero sí quiero que sepas una cosa. Si alguna vez me equivoco, quiero asumirlo y aprender de ello. Quiero seguir mejorando contigo y hacer las cosas cada día un poco mejor que el anterior.</p>
+
+            <p>Y sobre todo, me gustaría que las lágrimas que compartamos sean por felicidad, por emoción o por momentos bonitos, no por palabras mías que te hayan hecho daño.</p>
+
+            <p>Todavía me sigue haciendo ilusión ver un mensaje tuyo, igual que al principio. Y creo que eso es una de las cosas más bonitas que me han pasado contigo.</p>
+
+            <p>No sé cuántas aventuras nos esperan, ni cuántas conversaciones absurdas tendremos todavía, pero sí sé que tengo muchas ganas de seguir viviendo todo eso contigo.</p>
+
+            <p>Gracias por haber decidido compartir tu tiempo conmigo.</p>
+
+            <p class="firma">Dani ❤️</p>
+
+            <hr style="margin:20px 0; border:none; border-top:1px solid #eee;">
+
+            <p style="text-align:center;color:#888;font-size:13px;">
+                Inicio de la colección ❤️
+            </p>
+
+            <button class="botonCerrarCarta" onclick="cerrarCarta()">
+                Volver ❤️
+            </button>
+
+        </div> <!-- textoCarta -->
+
+    </div> <!-- contenidoCarta -->
+
+</div><!-- cartaModal -->
+
+<script>
+
+
+function actualizarContador(){
+
+    const fechaInicio = new Date("2026-05-01");
+    const hoy = new Date();
+
+    let años = hoy.getFullYear() - fechaInicio.getFullYear();
+
+    let aniversario = new Date(
+        hoy.getFullYear(),
+        fechaInicio.getMonth(),
+        fechaInicio.getDate()
+    );
+
+    if(hoy < aniversario){
+        años--;
+        aniversario.setFullYear(hoy.getFullYear() - 1);
+    }
+
+    const diasRestantes = Math.floor(
+        (hoy - aniversario) / (1000 * 60 * 60 * 24)
+    );
+
+    if(años > 0){
+        document.getElementById("dias").innerHTML =
+            años + " año" +
+            (años > 1 ? "s" : "") +
+            "<br>" +
+            diasRestantes + " días";
+    }else{
+        document.getElementById("dias").innerText =
+            diasRestantes + " días";
+    }
+}
+
+function mostrarSorpresa(){
+    document.getElementById("sorpresa").style.display = "block";
+}
+
+function abrirCarta(){
+    document.getElementById("cartaModal").style.display = "flex";
+}
+
+function cerrarCarta(){
+    document.getElementById("cartaModal").style.display = "none";
+}
+
+actualizarContador();
+
+const flores = ["🌷","🌹"];
+
+function crearFlor(){
+    const flor = document.createElement("div");
+    flor.classList.add("flor");
+    flor.innerText = flores[Math.floor(Math.random() * flores.length)];
+    flor.style.left = Math.random() * 100 + "vw";
+    flor.style.animationDuration = (5 + Math.random() * 5) + "s";
+
+    document.body.appendChild(flor);
+
+    setTimeout(() => {
+        flor.remove();
+    }, 10000);
+}
+
+function crearCarta(){
+    const carta = document.createElement("div");
+    carta.classList.add("carta");
+	carta.innerHTML = `
+	<div class="sobre">
+    💌
+    <span class="numeroCarta">1</span>
+	</div>
+	`;
+	carta.title = "Carta #1";
+    carta.style.left = Math.random() * 100 + "vw";
+    carta.style.animationDuration = (8 + Math.random() * 4) + "s";
+    carta.onclick = abrirCarta;
+
+    document.body.appendChild(carta);
+
+    setTimeout(() => {
+        carta.remove();
+    }, 12000);
+}
+
+setInterval(crearFlor, 500);
+setInterval(crearCarta, 3000);
+
+function cerrarSiClicaFuera(event){
+    if(event.target.id === "cartaModal"){
+        cerrarCarta();
+    }
+}
+</script>
+
+</body>
+</html>
